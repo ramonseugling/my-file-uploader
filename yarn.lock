@@ -16199,6 +16199,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"phosphor-react@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "phosphor-react@npm:1.4.1"
+  peerDependencies:
+    react: ">=16"
+  checksum: 6441f25e4134d86ade34739bbe89dbfecf6c0fa4fa7dc6ec32b36dc76d43ddf22e3535f780db080b705ad01f1292ae3115b0244cc7659a7b53e604f6cf817425
+  languageName: node
+  linkType: hard
+
 "picocolors@npm:^1.0.0":
   version: 1.0.0
   resolution: "picocolors@npm:1.0.0"
@@ -20399,6 +20408,7 @@ __metadata:
     "@redwoodjs/vite": 6.2.2
     "@redwoodjs/web": 6.2.2
     "@types/styled-components": ^5.1.27
+    phosphor-react: ^1.4.1
     prop-types: 15.8.1
     react: 18.2.0
     react-dom: 18.2.0

@@ -41,7 +41,6 @@ export const StyledDragFileContainer = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: 1rem;
   top: 0px;
   right: 0px;
   bottom: 0px;

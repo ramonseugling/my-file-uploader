@@ -1,4 +1,6 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+import { useFilesContext } from '../../contexts/FileContext/useFiles'
 
 import {
   StyledDragFileContainer,
@@ -10,7 +12,10 @@ import {
 
 const DragAndDrop = () => {
   const [dragActive, setDragActive] = useState(false)
+
   const inputRef = useRef(null)
+
+  const { filesSelected, handleFileSelected } = useFilesContext()
 
   // handle drag events
   const handleDrag = function (e) {
@@ -30,7 +35,7 @@ const DragAndDrop = () => {
     setDragActive(false)
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       // handleFiles(e.dataTransfer.files);
-      console.log(e.dataTransfer.files)
+      handleFileSelected(e.dataTransfer.files[0])
     }
   }
 
@@ -39,7 +44,7 @@ const DragAndDrop = () => {
     e.preventDefault()
     if (e.target.files && e.target.files[0]) {
       // handleFiles(e.target.files);
-      console.log(e.target.files)
+      handleFileSelected(e.target.files[0])
     }
   }
 
@@ -47,6 +52,11 @@ const DragAndDrop = () => {
   const onButtonClick = () => {
     inputRef.current.click()
   }
+
+  useEffect(() => {
+    console.log('entrou aq')
+    inputRef.current.value = ''
+  }, [filesSelected])
 
   return (
     <StyledForm onDragEnter={handleDrag} onSubmit={(e) => e.preventDefault()}>
