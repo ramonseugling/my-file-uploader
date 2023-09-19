@@ -5323,6 +5323,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/hoist-non-react-statics@npm:*":
+  version: 3.3.2
+  resolution: "@types/hoist-non-react-statics@npm:3.3.2"
+  dependencies:
+    "@types/react": "*"
+    hoist-non-react-statics: ^3.3.0
+  checksum: 2aaff564e7674b0b7389592f30e4681919a0a71986bc5d8c5ef67d9b5b3b46913920f5002a96fd37d8904fe5c0cc1e4cc5c92884c847b2f4a74cb30d841494d4
+  languageName: node
+  linkType: hard
+
 "@types/html-minifier-terser@npm:^6.0.0":
   version: 6.1.0
   resolution: "@types/html-minifier-terser@npm:6.1.0"
@@ -5649,6 +5659,17 @@ __metadata:
   version: 2.0.1
   resolution: "@types/stack-utils@npm:2.0.1"
   checksum: 3327ee919a840ffe907bbd5c1d07dfd79137dd9732d2d466cf717ceec5bb21f66296173c53bb56cff95fae4185b9cd6770df3e9745fe4ba528bbc4975f54d13f
+  languageName: node
+  linkType: hard
+
+"@types/styled-components@npm:^5.1.27":
+  version: 5.1.27
+  resolution: "@types/styled-components@npm:5.1.27"
+  dependencies:
+    "@types/hoist-non-react-statics": "*"
+    "@types/react": "*"
+    csstype: ^3.0.2
+  checksum: d44ad1641f95dded665045e72348ff4b9048a943b7b42438e0124bab81c6d110582e5f8f3917d7e700ed935a33d1ee3a5662bd042970ba78bb142aa4b4414a68
   languageName: node
   linkType: hard
 
@@ -12138,7 +12159,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hoist-non-react-statics@npm:^3.3.2":
+"hoist-non-react-statics@npm:^3.3.0, hoist-non-react-statics@npm:^3.3.2":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
   dependencies:
@@ -20377,6 +20398,7 @@ __metadata:
     "@redwoodjs/router": 6.2.2
     "@redwoodjs/vite": 6.2.2
     "@redwoodjs/web": 6.2.2
+    "@types/styled-components": ^5.1.27
     prop-types: 15.8.1
     react: 18.2.0
     react-dom: 18.2.0
