@@ -54,7 +54,6 @@ const DragAndDrop = () => {
   }
 
   useEffect(() => {
-    console.log('entrou aq')
     inputRef.current.value = ''
   }, [filesSelected])
 
