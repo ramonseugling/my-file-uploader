@@ -20,7 +20,7 @@ export const StyledLabelFileUpload = styled.label`
   border-radius: 3px;
   border-style: dashed;
   border-color: #cbd5e1;
-  margin-top: 2rem;
+  margin: 2rem;
 `
 
 export const StyledUploadButton = styled.button`
@@ -44,4 +44,3 @@ export const StyledDragFileContainer = styled.div`
   bottom: 0px;
   left: 0px;
 `
-

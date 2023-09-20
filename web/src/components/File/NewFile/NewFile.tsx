@@ -63,7 +63,7 @@ const NewFile = () => {
   }
 
   return (
-    <div className="rw-segment">
+    <div className="rw-segment-new-file">
       <header className="rw-segment-header">
         <h2 className="rw-heading rw-heading-secondary">New File</h2>
       </header>

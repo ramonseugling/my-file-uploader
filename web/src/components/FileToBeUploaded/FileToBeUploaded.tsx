@@ -26,6 +26,10 @@ const FileToBeUploaded = ({
     return parts[1].toUpperCase()
   }
 
+  const bytesToKilobytes = (bytes: number): number => {
+    return Math.trunc(bytes / 1024)
+  }
+
   return (
     <StyledContainer>
       <StyledDocumentInfoContainer>
@@ -34,7 +38,7 @@ const FileToBeUploaded = ({
         </StyledDocumentTypeContainer>
         <StyledDocumentNameAndSizeContainer>
           <span>{name}</span>
-          <span>{size}</span>
+          <span>{bytesToKilobytes(size)} KB</span>
         </StyledDocumentNameAndSizeContainer>
       </StyledDocumentInfoContainer>
       <StyledDocumentActionsContainer>

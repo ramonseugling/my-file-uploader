@@ -1,4 +1,8 @@
-import { DeleteObjectCommand, S3Client } from '@aws-sdk/client-s3'
+import {
+  DeleteObjectCommand,
+  GetObjectCommand,
+  S3Client,
+} from '@aws-sdk/client-s3'
 import type { DeleteFileMutationVariables, FindFileById } from 'types/graphql'
 
 import { Link, routes, navigate } from '@redwoodjs/router'
@@ -66,6 +70,46 @@ const File = ({ file }: Props) => {
     }
   }
 
+  const saveByteArray = (fileName, byte) => {
+    const blob = new Blob([byte], { type: 'application/pdf' })
+    const link = document.createElement('a')
+    link.href = window.URL.createObjectURL(blob)
+    link.download = fileName
+    link.click()
+  }
+
+  const handleDownloadFile = async () => {
+    try {
+      const command = new GetObjectCommand({
+        Bucket: bucket,
+        Key: file.title,
+      })
+
+      try {
+        const response = await s3Client.send(command)
+        const str = await response.Body.transformToByteArray()
+        saveByteArray(file.title, str)
+      } catch (err) {
+        console.error(err)
+      }
+
+      // Create a hidden anchor element to trigger the download
+      const link = document.createElement('a')
+      // link.href = signedUrl
+      link.target = '_blank'
+      link.download = file.title
+      document.body.appendChild(link)
+
+      // Trigger the click event to start the download
+      link.click()
+
+      // Clean up the anchor element
+      document.body.removeChild(link)
+    } catch (error) {
+      console.error('Error downloading file:', error)
+    }
+  }
+
   return (
     <>
       <div className="rw-segment">
@@ -92,6 +136,13 @@ const File = ({ file }: Props) => {
         </table>
       </div>
       <nav className="rw-button-group">
+        <button
+          type="button"
+          className="rw-button rw-button-blue"
+          onClick={handleDownloadFile}
+        >
+          Download
+        </button>
         <Link
           to={routes.editFile({ id: file.id })}
           className="rw-button rw-button-blue"

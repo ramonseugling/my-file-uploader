@@ -25,7 +25,7 @@ interface FileFormProps {
 }
 
 const FileForm = (props: FileFormProps) => {
-  const [file, setFile] = useState<File>()
+  const [file, setFile] = useState<File>(null)
   const [dragActive, setDragActive] = useState(false)
 
   const handleSubmit = (data: FormFile) => {
@@ -123,7 +123,7 @@ const FileForm = (props: FileFormProps) => {
         <div className="rw-button-group">
           <button
             type="submit"
-            disabled={props.loading || !file}
+            disabled={!file}
             className="rw-button rw-button-blue"
           >
             Save

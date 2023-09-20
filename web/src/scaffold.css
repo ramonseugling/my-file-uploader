@@ -9,10 +9,10 @@
 }
 .rw-scaffold main {
   color: #4a5568;
-  /* display: block; */
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 .rw-scaffold h1,
 .rw-scaffold h2 {
@@ -69,6 +69,15 @@
   border-width: 1px;
   border-color: #e5e7eb;
   overflow: hidden;
+  width: 100%;
+  scrollbar-color: #a1a1aa transparent;
+}
+
+.rw-segment-new-file {
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: #e5e7eb;
+  overflow: hidden;
   width: 700px;
   scrollbar-color: #a1a1aa transparent;
 }
@@ -96,7 +105,7 @@
 }
 .rw-segment-main {
   background-color: #f7fafc;
-  padding: 1rem;
+  padding: 1rem 0;
 }
 .rw-link {
   color: #4299e1;
@@ -218,6 +227,15 @@
   display: flex;
   justify-content: center;
   margin: 0.75rem 0.5rem;
+
+   :disabled {
+    background-color: #718096;
+    color: #fff;
+    cursor: not-allowed;
+    &:hover {
+      background-color: #718096; /* Override the hover background color */
+    }
+  }
 }
 .rw-button-group .rw-button {
   margin: 0 0.25rem;
