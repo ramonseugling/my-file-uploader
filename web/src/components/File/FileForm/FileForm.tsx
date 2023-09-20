@@ -5,7 +5,7 @@ import type { EditFileById, UpdateFileInput } from 'types/graphql'
 import { FormError } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 
-import FileToBeUploaded from '../../FileToBeUploaded/FileToBeUploaded'
+import FileToBeUploaded from '../FileToBeUploaded/FileToBeUploaded'
 
 import {
   StyledDragFileContainer,
@@ -25,12 +25,12 @@ interface FileFormProps {
 }
 
 const FileForm = (props: FileFormProps) => {
-  const [file, setFile] = useState<File>(null)
+  const [fileToBeUploaded, setFileToBeUploaded] = useState<File>(null)
   const [dragActive, setDragActive] = useState(false)
 
   const handleSubmit = (data: FormFile) => {
-    if (file) {
-      props.onSave(data, props?.file?.id, file)
+    if (fileToBeUploaded) {
+      props.onSave(data, props?.file?.id, fileToBeUploaded)
     }
   }
 
@@ -39,7 +39,7 @@ const FileForm = (props: FileFormProps) => {
   const handleChange = (e) => {
     e.preventDefault()
     if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0])
+      setFileToBeUploaded(e.target.files[0])
     }
   }
 
@@ -58,12 +58,12 @@ const FileForm = (props: FileFormProps) => {
     e.stopPropagation()
     setDragActive(false)
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      setFile(e.dataTransfer.files[0])
+      setFileToBeUploaded(e.dataTransfer.files[0])
     }
   }
 
   const handleRemoveFile = () => {
-    setFile(null)
+    setFileToBeUploaded(null)
   }
 
   const onButtonClick = () => {
@@ -84,7 +84,7 @@ const FileForm = (props: FileFormProps) => {
           listClassName="rw-form-error-list"
         />
 
-        {!file && (
+        {!fileToBeUploaded && (
           <>
             <StyledInputFileUpload
               ref={inputRef}
@@ -110,12 +110,12 @@ const FileForm = (props: FileFormProps) => {
           </>
         )}
 
-        {file && (
+        {fileToBeUploaded && (
           <FileToBeUploaded
-            name={file.name}
-            type={file.type}
-            size={file.size}
-            key={file.name}
+            name={fileToBeUploaded.name}
+            type={fileToBeUploaded.type}
+            size={fileToBeUploaded.size}
+            key={fileToBeUploaded.name}
             onRemoveFile={handleRemoveFile}
           />
         )}
@@ -123,7 +123,7 @@ const FileForm = (props: FileFormProps) => {
         <div className="rw-button-group">
           <button
             type="submit"
-            disabled={!file}
+            disabled={!fileToBeUploaded}
             className="rw-button rw-button-blue"
           >
             Save

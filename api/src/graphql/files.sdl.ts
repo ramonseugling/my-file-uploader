@@ -2,7 +2,10 @@ export const schema = gql`
   type File {
     id: String!
     title: String!
-    url: String!
+    version: String!
+    user: User!
+    userId: String!
+    createdAt: DateTime!
   }
 
   type Query {
@@ -12,12 +15,12 @@ export const schema = gql`
 
   input CreateFileInput {
     title: String!
-    url: String!
+    version: String!
   }
 
   input UpdateFileInput {
     title: String
-    url: String
+    version: String
   }
 
   type Mutation {

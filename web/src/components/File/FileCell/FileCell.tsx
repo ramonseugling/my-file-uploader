@@ -9,7 +9,9 @@ export const QUERY = gql`
     file: file(id: $id) {
       id
       title
-      url
+      version
+      userId
+      createdAt
     }
   }
 `

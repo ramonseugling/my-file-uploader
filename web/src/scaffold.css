@@ -105,7 +105,7 @@
 }
 .rw-segment-main {
   background-color: #f7fafc;
-  padding: 1rem 0;
+  padding: 1rem ;
 }
 .rw-link {
   color: #4299e1;
@@ -311,10 +311,11 @@
 }
 .rw-table-wrapper-responsive {
   overflow-x: auto;
+  width: 700px;
 }
-.rw-table-wrapper-responsive .rw-table {
+/* .rw-table-wrapper-responsive .rw-table {
   min-width: 48rem;
-}
+} */
 .rw-table {
   table-layout: auto;
   width: 100%;

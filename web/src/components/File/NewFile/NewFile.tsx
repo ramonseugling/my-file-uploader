@@ -1,4 +1,8 @@
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
+import {
+  ListObjectVersionsCommand,
+  PutObjectCommand,
+  S3Client,
+} from '@aws-sdk/client-s3'
 import { CreateFileInput } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
@@ -36,30 +40,38 @@ const NewFile = () => {
     },
     onError: (error) => {
       toast.error(error.message)
+      console.log(error)
     },
   })
 
   const onSave = async (input: CreateFileInput, id?: string, file?: File) => {
-    const command = new PutObjectCommand({
+    const putObjectCommand = new PutObjectCommand({
       Bucket: bucket,
       Key: file.name,
       Body: file,
     })
 
+    const listObjectVersionsCommand = new ListObjectVersionsCommand({
+      Bucket: bucket,
+      Prefix: file.name,
+    })
+
     try {
-      await s3Client.send(command)
+      const { Versions } = await s3Client.send(listObjectVersionsCommand)
+      await s3Client.send(putObjectCommand)
+      Object.assign(input, {
+        ...input,
+        title: file.name,
+        version: Versions
+          ? 'Version'.concat(' ', (Versions.length + 1).toString())
+          : 'Version 1',
+      })
+
+      createFile({ variables: { input } })
     } catch (err) {
       toast.error(err)
       console.error(err)
     }
-
-    Object.assign(input, {
-      ...input,
-      title: file.name,
-      url: `https://${bucket}.s3.${region}.amazonaws.com/${file.name}`,
-    })
-
-    createFile({ variables: { input } })
   }
 
   return (

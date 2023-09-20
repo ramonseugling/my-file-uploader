@@ -24,11 +24,11 @@ describe('files', () => {
 
   scenario('creates a file', async () => {
     const result = await createFile({
-      input: { title: 'String', url: 'String' },
+      input: { title: 'String', version: 'String', userId: 'String' },
     })
 
     expect(result.title).toEqual('String')
-    expect(result.url).toEqual('String')
+    expect(result.version).toEqual('String')
   })
 
   scenario('updates a file', async (scenario: StandardScenario) => {

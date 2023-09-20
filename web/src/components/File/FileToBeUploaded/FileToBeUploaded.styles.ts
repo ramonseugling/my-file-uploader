@@ -4,7 +4,7 @@ export const StyledContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  border: 1px solid #0505050f;
+  border-bottom: 1px solid #0505050f;
   padding: 1rem;
 `
 

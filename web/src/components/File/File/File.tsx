@@ -56,18 +56,21 @@ const File = ({ file }: Props) => {
 
   const deleteFileOnStorage = async () => {
     try {
-      console.log(file, 'fa')
       const command = new DeleteObjectCommand({
         Bucket: bucket,
         Key: file.title,
       })
 
-      const data = await s3Client.send(command)
-      console.log('Success. Object deleted.', data)
-      return data
+      await s3Client.send(command)
     } catch (err) {
       console.log('Error', err)
     }
+  }
+
+  const formattedDate = (datetime: ConstructorParameters<typeof Date>[0]) => {
+    const parsedDate = new Date(datetime)
+    const month = parsedDate.toLocaleString('default', { month: 'long' })
+    return `${parsedDate.getDate()} ${month} ${parsedDate.getFullYear()}`
   }
 
   const saveByteArray = (fileName, byte) => {
@@ -115,22 +118,22 @@ const File = ({ file }: Props) => {
       <div className="rw-segment">
         <header className="rw-segment-header">
           <h2 className="rw-heading rw-heading-secondary">
-            File {file.id} Detail
+            File: {file.title}
           </h2>
         </header>
         <table className="rw-table">
           <tbody>
             <tr>
-              <th>Id</th>
-              <td>{file.id}</td>
-            </tr>
-            <tr>
-              <th>Title</th>
+              <th>File name</th>
               <td>{file.title}</td>
             </tr>
             <tr>
-              <th>Url</th>
-              <td>{file.url}</td>
+              <th>Version</th>
+              <td>{file.version}</td>
+            </tr>
+            <tr>
+              <th>Created at</th>
+              <td>{formattedDate(file.createdAt)}</td>
             </tr>
           </tbody>
         </table>

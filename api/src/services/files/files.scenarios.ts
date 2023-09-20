@@ -1,10 +1,11 @@
 import type { Prisma, File } from '@prisma/client'
+
 import type { ScenarioData } from '@redwoodjs/testing/api'
 
 export const standard = defineScenario<Prisma.FileCreateArgs>({
   file: {
-    one: { data: { title: 'String', url: 'String' } },
-    two: { data: { title: 'String', url: 'String' } },
+    one: { data: { title: 'String', version: 'String', userId: 'String' } },
+    two: { data: { title: 'String', version: 'String', userId: 'String' } },
   },
 })
 

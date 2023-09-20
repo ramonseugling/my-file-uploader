@@ -37,9 +37,6 @@ const FilesList = ({ files }: FindFiles) => {
     onError: (error) => {
       toast.error(error.message)
     },
-    // This refetches the query on the list page. Read more about other ways to
-    // update the cache over here:
-    // https://www.apollographql.com/docs/react/data/mutations/#making-all-other-cache-updates
     refetchQueries: [{ query: QUERY }],
     awaitRefetchQueries: true,
   })
@@ -74,18 +71,16 @@ const FilesList = ({ files }: FindFiles) => {
       <table className="rw-table">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Url</th>
+            <th>File name</th>
+            <th>Version</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
         <tbody>
           {files.map((file) => (
             <tr key={file.id}>
-              <td>{truncate(file.id)}</td>
               <td>{truncate(file.title)}</td>
-              <td>{truncate(file.url)}</td>
+              <td>{truncate(file.version)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

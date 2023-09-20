@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.414.0",
+    "@redwoodjs/auth-dbauth-web": "6.2.2",
     "@redwoodjs/forms": "6.2.2",
     "@redwoodjs/router": "6.2.2",
     "@redwoodjs/web": "6.2.2",

@@ -1,5 +1,5 @@
 import { useFilesContext } from '../../contexts/FileContext/useFiles'
-import FileToBeUploaded from '../FileToBeUploaded/FileToBeUploaded'
+import FileToBeUploaded from '../File/FileToBeUploaded/FileToBeUploaded'
 
 import {
   StyledContainer,
