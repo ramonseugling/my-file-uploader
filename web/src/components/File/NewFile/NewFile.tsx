@@ -12,10 +12,10 @@ import FileForm from 'src/components/File/FileForm'
 
 import { Container } from './NewFile.styles'
 
-const secretAccessKey = process.env.REDWOOD_ENV_AWS_SECRET_ACCESS_KEY // IAM user secret key
-const accessKeyId = process.env.REDWOOD_ENV_AWS_ACCESS_KEY_ID // IAM user access id
-const bucket = process.env.REDWOOD_ENV_S3_BUCKET // Bucket name
-const region = process.env.REDWOOD_ENV_AWS_REGION // Region
+const secretAccessKey = process.env.REDWOOD_ENV_AWS_SECRET_ACCESS_KEY
+const accessKeyId = process.env.REDWOOD_ENV_AWS_ACCESS_KEY_ID
+const bucket = process.env.REDWOOD_ENV_S3_BUCKET
+const region = process.env.REDWOOD_ENV_AWS_REGION
 
 const s3Client = new S3Client({
   region,

@@ -7,17 +7,17 @@ export const standard = defineScenario<Prisma.FileCreateArgs>({
     one: {
       data: {
         title: 'String',
-        version: 'String',
-        userId: 'String',
+        version: 'Version 1',
         size: 10,
-      },
-    },
-    two: {
-      data: {
-        title: 'String',
-        version: 'String',
-        userId: 'String',
-        size: 10,
+        user: {
+          create: {
+            id: '123',
+            name: 'John doe',
+            email: 'johndoe@email.com',
+            hashedPassword: 'String',
+            salt: 'String',
+          },
+        },
       },
     },
   },

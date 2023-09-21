@@ -41,7 +41,12 @@ const FileToBeUploaded = ({
       </StyledDocumentInfoContainer>
       <StyledDocumentActionsContainer>
         <button type="button" onClick={onRemoveFile}>
-          <XCircle size={24} color="	#ff3333" weight="fill" />
+          <XCircle
+            size={24}
+            color="	#ff3333"
+            weight="fill"
+            data-testid="remove-file-button"
+          />
         </button>
       </StyledDocumentActionsContainer>
     </StyledContainer>

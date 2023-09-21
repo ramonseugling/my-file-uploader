@@ -11,34 +11,41 @@ import type { StandardScenario } from './files.scenarios'
 
 describe('files', () => {
   scenario('returns all files', async (scenario: StandardScenario) => {
+    mockCurrentUser({ id: '123', name: 'John Doe' })
+
     const result = await files()
 
     expect(result.length).toEqual(Object.keys(scenario.file).length)
   })
 
   scenario('returns a single file', async (scenario: StandardScenario) => {
+    mockCurrentUser({ id: '123', name: 'John Doe' })
+
     const result = await file({ id: scenario.file.one.id })
 
     expect(result).toEqual(scenario.file.one)
   })
 
   scenario('creates a file', async () => {
+    mockCurrentUser({ id: '123', name: 'John Doe' })
+
     const result = await createFile({
       input: {
         title: 'String',
         version: 'String',
         size: 10,
-        userId: '3c5a04fd-3f14-44b5-8a34-57fe8fdb0137',
       },
     })
 
     expect(result.title).toEqual('String')
     expect(result.version).toEqual('String')
     expect(result.size).toEqual(10)
-    expect(result.userId).toEqual('3c5a04fd-3f14-44b5-8a34-57fe8fdb0137')
+    expect(result.userId).toEqual('123')
   })
 
   scenario('updates a file', async (scenario: StandardScenario) => {
+    mockCurrentUser({ id: '123', name: 'John Doe' })
+
     const original = (await file({ id: scenario.file.one.id })) as File
     const result = await updateFile({
       id: original.id,
@@ -49,6 +56,8 @@ describe('files', () => {
   })
 
   scenario('deletes a file', async (scenario: StandardScenario) => {
+    mockCurrentUser({ id: '123', name: 'John Doe' })
+
     const original = (await deleteFile({ id: scenario.file.one.id })) as File
     const result = await file({ id: original.id })
 

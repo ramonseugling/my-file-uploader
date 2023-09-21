@@ -78,7 +78,10 @@ const File = ({ file, onDelete }: Props) => {
     <DocumentContainer key={file.title}>
       <DocumentIconsContainer>
         <StyledFolderNotchMinus size={24} weight="fill" />
-        <StyledMenuButton onClick={handleMenuClick}>
+        <StyledMenuButton
+          onClick={handleMenuClick}
+          data-testid="actions-menu-button"
+        >
           <StyledDotsThreeOutline size={20} weight="fill" />
         </StyledMenuButton>
         <Menu

@@ -3,6 +3,10 @@
 const config = {
   rootDir: '../',
   preset: '@redwoodjs/testing/config/jest/web',
+  testEnvironment: 'jsdom',
+  testEnvironmentOptions: {
+    customExportConditions: [],
+  },
 }
 
 module.exports = config

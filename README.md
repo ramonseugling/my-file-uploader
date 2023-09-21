@@ -34,7 +34,7 @@ My application enables effortless file management in the cloud. You can easily u
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/ramonseugling/wrapt.git
+   git clone https://github.com/ramonseugling/my-file-uploader.git
 2. Install the dependencies
     ```bash
     yarn install
