@@ -62,3 +62,8 @@ export const formatDate = (datetime: ConstructorParameters<typeof Date>[0]) => {
   const month = parsedDate.toLocaleString('default', { month: 'long' })
   return `${parsedDate.getDate()} ${month} ${parsedDate.getFullYear()}`
 }
+
+export const bytesToKilobytes = (bytes: number): number => {
+  console.log(bytes, 'bytes')
+  return Math.trunc(bytes / 1024)
+}

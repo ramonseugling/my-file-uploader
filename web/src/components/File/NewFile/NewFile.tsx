@@ -62,11 +62,13 @@ const NewFile = () => {
 
       await s3Client.send(putObjectCommand)
 
+      console.log(file.size, 'size')
       const input = {
         title: file.name,
         version: Versions
           ? 'Version'.concat(' ', (Versions.length + 1).toString())
           : 'Version 1',
+        size: file.size,
       }
 
       createFile({ variables: { input } })

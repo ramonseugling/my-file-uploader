@@ -6,9 +6,21 @@ export const DocumentContainer = styled.div`
   flex-direction: column;
   border: 1px solid #0505052e;
   border-radius: 5px;
-  width: 250px;
+  max-width: 267px;
+  width: 100%;
   padding: 1rem;
   gap: 3rem;
+
+  @media (min-width: 768px) and (max-width: 1600px) {
+    width: 100%;
+    max-width: 309px;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
+    margin-right: 1rem;
+  }
 `
 
 export const DocumentIconsContainer = styled.div`

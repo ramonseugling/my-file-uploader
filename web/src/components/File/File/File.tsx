@@ -2,7 +2,7 @@ import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import { Menu, MenuItem } from '@mui/material'
 import type { DeleteFileMutationVariables, FindFileById } from 'types/graphql'
 
-import { formatDate } from '../../../lib/formatters'
+import { bytesToKilobytes, formatDate } from '../../../lib/formatters'
 
 import {
   DocumentContainer,
@@ -99,6 +99,8 @@ const File = ({ file, onDelete }: Props) => {
         </StyledTitle>
         <StyledOtherProperties>
           <span>{file.version}</span>
+          {' | '}
+          <span>{bytesToKilobytes(file.size)}KB</span>
           {' | '}
           <span>{formatDate(file.createdAt)}</span>
         </StyledOtherProperties>

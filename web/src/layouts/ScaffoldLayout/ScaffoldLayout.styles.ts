@@ -19,7 +19,7 @@ export const PagesContainer = styled.div`
   height: 500px;
   padding: 2rem;
   border-radius: 5px;
-  width: 600px;
+  width: 700px;
   flex-direction: column;
   border: 1px solid #0505052e;
   gap: 2rem;

@@ -12,6 +12,7 @@ export const QUERY = gql`
       title
       version
       createdAt
+      size
     }
   }
 `

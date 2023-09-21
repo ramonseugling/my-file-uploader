@@ -1,5 +1,7 @@
 import { XCircle } from 'phosphor-react'
 
+import { bytesToKilobytes } from '../../../lib/formatters'
+
 import {
   StyledContainer,
   StyledDocumentActionsContainer,
@@ -24,10 +26,6 @@ const FileToBeUploaded = ({
   const getFileExtension = (contentType: string): string => {
     const parts: string[] = contentType.split('/')
     return parts[1].toUpperCase()
-  }
-
-  const bytesToKilobytes = (bytes: number): number => {
-    return Math.trunc(bytes / 1024)
   }
 
   return (
