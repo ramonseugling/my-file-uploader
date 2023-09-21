@@ -4,8 +4,22 @@ import type { ScenarioData } from '@redwoodjs/testing/api'
 
 export const standard = defineScenario<Prisma.FileCreateArgs>({
   file: {
-    one: { data: { title: 'String', version: 'String', userId: 'String' } },
-    two: { data: { title: 'String', version: 'String', userId: 'String' } },
+    one: {
+      data: {
+        title: 'String',
+        version: 'String',
+        userId: 'String',
+        size: 10,
+      },
+    },
+    two: {
+      data: {
+        title: 'String',
+        version: 'String',
+        userId: 'String',
+        size: 10,
+      },
+    },
   },
 })
 

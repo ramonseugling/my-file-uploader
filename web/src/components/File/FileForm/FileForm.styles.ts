@@ -26,7 +26,7 @@ export const StyledLabelFileUpload = styled.label`
   border-width: 2px;
   border-radius: 3px;
   border-style: dashed;
-  border-color: #cbd5e1;
+  border-color: ${(props) => props.theme['blue-100']};
   margin: 2rem;
 `
 
@@ -36,7 +36,7 @@ export const StyledUploadButton = styled.button`
   font-size: 1rem;
   border: none;
   background-color: transparent;
-  color: #1d4ed8;
+  color: ${(props) => props.theme['blue-500']};
 
   &:hover {
     text-decoration-line: underline;

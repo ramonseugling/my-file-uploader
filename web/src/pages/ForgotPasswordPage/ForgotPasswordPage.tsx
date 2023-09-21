@@ -27,12 +27,11 @@ const ForgotPasswordPage = () => {
     if (response.error) {
       toast.error(response.error)
     } else {
-      // The function `forgotPassword.handler` in api/src/functions/auth.js has
-      // been invoked, let the user know how to get the link to reset their
-      // password (sent in email, perhaps?)
       toast.success(
         'A link to reset your password was sent to ' + response.email
       )
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+
       navigate(routes.login())
     }
   }
@@ -60,7 +59,7 @@ const ForgotPasswordPage = () => {
                       className="rw-label"
                       errorClassName="rw-label rw-label-error"
                     >
-                      Username
+                      E-mail
                     </Label>
                     <TextField
                       name="username"
@@ -70,7 +69,7 @@ const ForgotPasswordPage = () => {
                       validation={{
                         required: {
                           value: true,
-                          message: 'Username is required',
+                          message: 'E-mail is required',
                         },
                       }}
                     />

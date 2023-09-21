@@ -7,10 +7,9 @@ import FatalErrorPage from 'src/pages/FatalErrorPage'
 import Routes from 'src/Routes'
 
 import './scaffold.css'
+import { AuthProvider, useAuth } from './auth'
 import { GlobalStyle } from './styles/global'
 import { defaultTheme } from './styles/themes/default'
-
-import { AuthProvider, useAuth } from './auth'
 
 const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>

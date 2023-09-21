@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react'
 
-import type { EditFileById, UpdateFileInput } from 'types/graphql'
-
 import { FormError } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
+import { toast } from '@redwoodjs/web/dist/toast'
 
+// import { UpdateFileInput } from '../../../../types/graphql'
 import FileToBeUploaded from '../FileToBeUploaded/FileToBeUploaded'
 
 import {
@@ -16,11 +16,10 @@ import {
   StyledUploadButton,
 } from './FileForm.styles'
 
-type FormFile = NonNullable<EditFileById['file']>
+// type FormFile = NonNullable<EditFileById['file']>
 
 interface FileFormProps {
-  file?: EditFileById['file']
-  onSave: (data: UpdateFileInput, id?: FormFile['id'], file?: File) => void
+  onSave: (file: File) => void
   error: RWGqlError
   loading: boolean
 }
@@ -29,9 +28,9 @@ const FileForm = (props: FileFormProps) => {
   const [fileToBeUploaded, setFileToBeUploaded] = useState<File>(null)
   const [dragActive, setDragActive] = useState(false)
 
-  const handleSubmit = (data: FormFile) => {
+  const handleSubmit = () => {
     if (fileToBeUploaded) {
-      props.onSave(data, props?.file?.id, fileToBeUploaded)
+      props.onSave(fileToBeUploaded)
     }
   }
 
@@ -40,7 +39,25 @@ const FileForm = (props: FileFormProps) => {
   const handleChange = (e) => {
     e.preventDefault()
     if (e.target.files && e.target.files[0]) {
-      setFileToBeUploaded(e.target.files[0])
+      handleFileTypeValidation(e.target.files[0])
+    }
+  }
+
+  const handleFileTypeValidation = (file) => {
+    const acceptedTypes = [
+      'application/pdf',
+      'image/jpeg',
+      'image/jpg',
+      'image/png',
+      'text/plain',
+    ]
+
+    if (acceptedTypes.includes(file.type)) {
+      setFileToBeUploaded(file)
+    } else {
+      toast.error(
+        'Unsupported file type. Please select a PDF, JPG, JPEG, or PNG file.'
+      )
     }
   }
 
@@ -59,7 +76,7 @@ const FileForm = (props: FileFormProps) => {
     e.stopPropagation()
     setDragActive(false)
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      setFileToBeUploaded(e.dataTransfer.files[0])
+      handleFileTypeValidation(e.dataTransfer.files[0])
     }
   }
 
@@ -73,7 +90,7 @@ const FileForm = (props: FileFormProps) => {
 
   return (
     <Container>
-      <StyledForm<FormFile>
+      <StyledForm
         onSubmit={handleSubmit}
         onDragEnter={handleDrag}
         error={props.error}
@@ -91,6 +108,7 @@ const FileForm = (props: FileFormProps) => {
               ref={inputRef}
               type="file"
               onChange={handleChange}
+              accept=".pdf, .jpg, .jpeg, .png, .txt"
             />
             <StyledLabelFileUpload htmlFor="input-file-upload">
               <div>

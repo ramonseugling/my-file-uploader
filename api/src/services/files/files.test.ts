@@ -24,11 +24,18 @@ describe('files', () => {
 
   scenario('creates a file', async () => {
     const result = await createFile({
-      input: { title: 'String', version: 'String', userId: 'String' },
+      input: {
+        title: 'String',
+        version: 'String',
+        size: 10,
+        userId: '3c5a04fd-3f14-44b5-8a34-57fe8fdb0137',
+      },
     })
 
     expect(result.title).toEqual('String')
     expect(result.version).toEqual('String')
+    expect(result.size).toEqual(10)
+    expect(result.userId).toEqual('3c5a04fd-3f14-44b5-8a34-57fe8fdb0137')
   })
 
   scenario('updates a file', async (scenario: StandardScenario) => {

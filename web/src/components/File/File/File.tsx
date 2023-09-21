@@ -1,20 +1,24 @@
-import {
-  DeleteObjectCommand,
-  GetObjectCommand,
-  S3Client,
-} from '@aws-sdk/client-s3'
+import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3'
+import { Menu, MenuItem } from '@mui/material'
 import type { DeleteFileMutationVariables, FindFileById } from 'types/graphql'
 
-import { Link, routes, navigate } from '@redwoodjs/router'
-import { useMutation } from '@redwoodjs/web'
-import { toast } from '@redwoodjs/web/toast'
+import { formatDate } from '../../../lib/formatters'
 
-import {} from 'src/lib/formatters'
+import {
+  DocumentContainer,
+  DocumentIconsContainer,
+  DocumentInfoContainer,
+  StyledDotsThreeOutline,
+  StyledFolderNotchMinus,
+  StyledMenuButton,
+  StyledOtherProperties,
+  StyledTitle,
+} from './File.styles'
 
-const secretAccessKey = process.env.REDWOOD_ENV_AWS_SECRET_ACCESS_KEY // IAM user secret key
-const accessKeyId = process.env.REDWOOD_ENV_AWS_ACCESS_KEY_ID // IAM user access id
-const bucket = process.env.REDWOOD_ENV_S3_BUCKET // Bucket name
-const region = process.env.REDWOOD_ENV_AWS_REGION // Region
+const secretAccessKey = process.env.REDWOOD_ENV_AWS_SECRET_ACCESS_KEY
+const accessKeyId = process.env.REDWOOD_ENV_AWS_ACCESS_KEY_ID
+const bucket = process.env.REDWOOD_ENV_S3_BUCKET
+const region = process.env.REDWOOD_ENV_AWS_REGION
 
 const s3Client = new S3Client({
   region,
@@ -24,53 +28,23 @@ const s3Client = new S3Client({
   },
 })
 
-const DELETE_FILE_MUTATION = gql`
-  mutation DeleteFileMutation($id: String!) {
-    deleteFile(id: $id) {
-      id
-    }
-  }
-`
-
 interface Props {
   file: NonNullable<FindFileById['file']>
+  onDelete?: (id: DeleteFileMutationVariables['id'], title: string) => void
 }
 
-const File = ({ file }: Props) => {
-  const [deleteFile] = useMutation(DELETE_FILE_MUTATION, {
-    onCompleted: () => {
-      toast.success('File deleted')
-      navigate(routes.files())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+const File = ({ file, onDelete }: Props) => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+  const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleCloseMenu = () => {
+    setAnchorEl(null)
+  }
 
   const onDeleteClick = (id: DeleteFileMutationVariables['id']) => {
-    if (confirm('Are you sure you want to delete file ' + id + '?')) {
-      deleteFile({ variables: { id } })
-      deleteFileOnStorage()
-    }
-  }
-
-  const deleteFileOnStorage = async () => {
-    try {
-      const command = new DeleteObjectCommand({
-        Bucket: bucket,
-        Key: file.title,
-      })
-
-      await s3Client.send(command)
-    } catch (err) {
-      console.log('Error', err)
-    }
-  }
-
-  const formattedDate = (datetime: ConstructorParameters<typeof Date>[0]) => {
-    const parsedDate = new Date(datetime)
-    const month = parsedDate.toLocaleString('default', { month: 'long' })
-    return `${parsedDate.getDate()} ${month} ${parsedDate.getFullYear()}`
+    onDelete(id, file.title)
   }
 
   const saveByteArray = (fileName, byte) => {
@@ -95,72 +69,41 @@ const File = ({ file }: Props) => {
       } catch (err) {
         console.error(err)
       }
-
-      // Create a hidden anchor element to trigger the download
-      const link = document.createElement('a')
-      // link.href = signedUrl
-      link.target = '_blank'
-      link.download = file.title
-      document.body.appendChild(link)
-
-      // Trigger the click event to start the download
-      link.click()
-
-      // Clean up the anchor element
-      document.body.removeChild(link)
     } catch (error) {
       console.error('Error downloading file:', error)
     }
   }
 
   return (
-    <>
-      <div className="rw-segment">
-        <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">
-            File: {file.title}
-          </h2>
-        </header>
-        <table className="rw-table">
-          <tbody>
-            <tr>
-              <th>File name</th>
-              <td>{file.title}</td>
-            </tr>
-            <tr>
-              <th>Version</th>
-              <td>{file.version}</td>
-            </tr>
-            <tr>
-              <th>Created at</th>
-              <td>{formattedDate(file.createdAt)}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <nav className="rw-button-group">
-        <button
-          type="button"
-          className="rw-button rw-button-blue"
-          onClick={handleDownloadFile}
+    <DocumentContainer key={file.title}>
+      <DocumentIconsContainer>
+        <StyledFolderNotchMinus size={24} weight="fill" />
+        <StyledMenuButton onClick={handleMenuClick}>
+          <StyledDotsThreeOutline size={20} weight="fill" />
+        </StyledMenuButton>
+        <Menu
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleCloseMenu}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
         >
-          Download
-        </button>
-        <Link
-          to={routes.editFile({ id: file.id })}
-          className="rw-button rw-button-blue"
-        >
-          Edit
-        </Link>
-        <button
-          type="button"
-          className="rw-button rw-button-red"
-          onClick={() => onDeleteClick(file.id)}
-        >
-          Delete
-        </button>
-      </nav>
-    </>
+          <MenuItem onClick={() => handleDownloadFile()}>Download</MenuItem>
+          <MenuItem onClick={() => onDeleteClick(file.id)}>Delete</MenuItem>
+        </Menu>
+      </DocumentIconsContainer>
+      <DocumentInfoContainer>
+        <StyledTitle>
+          <span>{file.title}</span>
+        </StyledTitle>
+        <StyledOtherProperties>
+          <span>{file.version}</span>
+          {' | '}
+          <span>{formatDate(file.createdAt)}</span>
+        </StyledOtherProperties>
+      </DocumentInfoContainer>
+    </DocumentContainer>
   )
 }
 

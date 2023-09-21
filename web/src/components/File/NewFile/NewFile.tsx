@@ -3,7 +3,6 @@ import {
   PutObjectCommand,
   S3Client,
 } from '@aws-sdk/client-s3'
-import { CreateFileInput } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
@@ -46,7 +45,7 @@ const NewFile = () => {
     },
   })
 
-  const onSave = async (input: CreateFileInput, id?: string, file?: File) => {
+  const onSave = async (file: File) => {
     const putObjectCommand = new PutObjectCommand({
       Bucket: bucket,
       Key: file.name,
@@ -60,14 +59,15 @@ const NewFile = () => {
 
     try {
       const { Versions } = await s3Client.send(listObjectVersionsCommand)
+
       await s3Client.send(putObjectCommand)
-      Object.assign(input, {
-        ...input,
+
+      const input = {
         title: file.name,
         version: Versions
           ? 'Version'.concat(' ', (Versions.length + 1).toString())
           : 'Version 1',
-      })
+      }
 
       createFile({ variables: { input } })
     } catch (err) {
@@ -77,15 +77,9 @@ const NewFile = () => {
   }
 
   return (
-    // <div className="rw-segment-new-file">
     <Container>
-      {/* <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">New File</h2>
-      </header> */}
-      {/* <div className="rw-segment-main"> */}
       <FileForm onSave={onSave} loading={loading} error={error} />
     </Container>
-    // </div>
   )
 }
 

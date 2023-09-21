@@ -24,7 +24,6 @@ const SignupPage = () => {
     }
   }, [isAuthenticated])
 
-  // focus on username box on page load
   const usernameRef = useRef<HTMLInputElement>(null)
   useEffect(() => {
     usernameRef.current?.focus()
@@ -40,9 +39,9 @@ const SignupPage = () => {
     if (response.message) {
       toast(response.message)
     } else if (response.error) {
+      toast.error(response.error)
       console.error(response.error)
     } else {
-      // user is signed in automatically
       toast.success('Welcome!')
     }
   }

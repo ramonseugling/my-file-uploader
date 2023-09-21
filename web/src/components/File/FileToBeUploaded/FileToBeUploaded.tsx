@@ -43,7 +43,7 @@ const FileToBeUploaded = ({
       </StyledDocumentInfoContainer>
       <StyledDocumentActionsContainer>
         <button type="button" onClick={onRemoveFile}>
-          <XCircle size={24} color="#ff7f73" weight="fill" />
+          <XCircle size={24} color="	#ff3333" weight="fill" />
         </button>
       </StyledDocumentActionsContainer>
     </StyledContainer>

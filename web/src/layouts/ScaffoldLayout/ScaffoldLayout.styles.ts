@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-import { Link, NavLink } from '@redwoodjs/router'
+import { NavLink } from '@redwoodjs/router'
 
 export const MainContainer = styled.main`
   width: 100vw;
@@ -9,7 +9,7 @@ export const MainContainer = styled.main`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: #d3e4f8;
+  background-color: ${(props) => props.theme['blue-300']};
 `
 
 export const PagesContainer = styled.div`
@@ -23,7 +23,17 @@ export const PagesContainer = styled.div`
   flex-direction: column;
   border: 1px solid #0505052e;
   gap: 2rem;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.white};
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (min-width: 1600px) {
+    width: 900px;
+    height: 700px;
+  }
 `
 
 export const StyledMenu = styled.div`
@@ -54,16 +64,16 @@ export const StyledHeader = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  background-color: #1d4ed8;
+  background-color: ${(props) => props.theme['blue-500']};
 `
 
 export const StyledTitle = styled.h2`
-  color: #fff;
+  color: ${(props) => props.theme.white};
 `
 
 export const StyledLogoutButton = styled.button`
-  color: #1d4ed8;
-  background-color: #fff;
+  color: ${(props) => props.theme['blue-500']};
+  background-color: ${(props) => props.theme.white};
   display: flex;
   justify-content: center;
   font-size: 0.75rem;

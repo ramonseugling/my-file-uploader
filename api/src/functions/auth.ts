@@ -32,7 +32,7 @@ export const handler = async (
       // for security reasons you may want to be vague here rather than expose
       // the fact that the email address wasn't found (prevents fishing for
       // valid email addresses)
-      usernameNotFound: 'Username not found',
+      usernameNotFound: 'User not found',
       // if the user somehow gets around client validation
       usernameRequired: 'Username is required',
     },
