@@ -68,7 +68,7 @@
   border-radius: 0.5rem;
   border-width: 1px;
   border-color: #e5e7eb;
-  overflow: hidden;
+  /* overflow: hidden; */
   width: 100%;
   scrollbar-color: #a1a1aa transparent;
 }
@@ -77,11 +77,11 @@
   border-radius: 0.5rem;
   border-width: 1px;
   border-color: #e5e7eb;
-  overflow: hidden;
+  /* overflow: hidden; */
   width: 700px;
   scrollbar-color: #a1a1aa transparent;
 }
-.rw-segment::-webkit-scrollbar {
+/* .rw-segment::-webkit-scrollbar {
   height: initial;
 }
 .rw-segment::-webkit-scrollbar-track {
@@ -97,7 +97,7 @@
   background-clip: content-box;
   border: 3px solid transparent;
   border-radius: 10px;
-}
+} */
 .rw-segment-header {
   background-color: #e2e8f0;
   color: #4a5568;
@@ -205,7 +205,7 @@
   color: #fff;
 }
 .rw-button.rw-button-blue {
-  background-color: #3182ce;
+  background-color: #1d4ed8;
   color: #fff;
 }
 .rw-button.rw-button-blue:hover {
@@ -310,7 +310,7 @@
   color: #c53030;
 }
 .rw-table-wrapper-responsive {
-  overflow-x: auto;
+  /* overflow-x: auto; */
   width: 700px;
 }
 /* .rw-table-wrapper-responsive .rw-table {

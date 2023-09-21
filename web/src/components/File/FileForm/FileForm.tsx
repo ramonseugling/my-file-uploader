@@ -8,6 +8,7 @@ import type { RWGqlError } from '@redwoodjs/forms'
 import FileToBeUploaded from '../FileToBeUploaded/FileToBeUploaded'
 
 import {
+  Container,
   StyledDragFileContainer,
   StyledForm,
   StyledInputFileUpload,
@@ -71,7 +72,7 @@ const FileForm = (props: FileFormProps) => {
   }
 
   return (
-    <div className="rw-form-wrapper">
+    <Container>
       <StyledForm<FormFile>
         onSubmit={handleSubmit}
         onDragEnter={handleDrag}
@@ -130,7 +131,7 @@ const FileForm = (props: FileFormProps) => {
           </button>
         </div>
       </StyledForm>
-    </div>
+    </Container>
   )
 }
 

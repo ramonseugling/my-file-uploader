@@ -11,6 +11,8 @@ import { toast } from '@redwoodjs/web/toast'
 
 import FileForm from 'src/components/File/FileForm'
 
+import { Container } from './NewFile.styles'
+
 const secretAccessKey = process.env.REDWOOD_ENV_AWS_SECRET_ACCESS_KEY // IAM user secret key
 const accessKeyId = process.env.REDWOOD_ENV_AWS_ACCESS_KEY_ID // IAM user access id
 const bucket = process.env.REDWOOD_ENV_S3_BUCKET // Bucket name
@@ -75,14 +77,15 @@ const NewFile = () => {
   }
 
   return (
-    <div className="rw-segment-new-file">
-      <header className="rw-segment-header">
+    // <div className="rw-segment-new-file">
+    <Container>
+      {/* <header className="rw-segment-header">
         <h2 className="rw-heading rw-heading-secondary">New File</h2>
-      </header>
-      <div className="rw-segment-main">
-        <FileForm onSave={onSave} loading={loading} error={error} />
-      </div>
-    </div>
+      </header> */}
+      {/* <div className="rw-segment-main"> */}
+      <FileForm onSave={onSave} loading={loading} error={error} />
+    </Container>
+    // </div>
   )
 }
 

@@ -2,6 +2,13 @@ import styled from 'styled-components'
 
 import { Form } from '@redwoodjs/forms'
 
+export const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+`
 export const StyledForm = styled(Form)`
   width: 100%;
   text-align: center;
@@ -15,7 +22,7 @@ export const StyledLabelFileUpload = styled.label`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 5rem;
+  height: 16rem;
   border-width: 2px;
   border-radius: 3px;
   border-style: dashed;
@@ -29,6 +36,7 @@ export const StyledUploadButton = styled.button`
   font-size: 1rem;
   border: none;
   background-color: transparent;
+  color: #1d4ed8;
 
   &:hover {
     text-decoration-line: underline;
