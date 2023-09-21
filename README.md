@@ -32,16 +32,24 @@ My application enables effortless file management in the cloud. You can easily u
 ### Installation
 
 1. Clone the repository:
-
    ```bash
    git clone https://github.com/ramonseugling/my-file-uploader.git
-2. Install the dependencies
+
+2. Add the values to the .env file, following the .env.example.
+
+
+3. Install the dependencies
     ```bash
     yarn install
 
- 3. Start the development server
+4. Run migration
+    ```bash
+    yarn redwood prisma migrate dev
+
+5. Start the development server
     ```bash
     yarn redwood dev
-4. Your browser should automatically open to [http://localhost:8910](http://localhost:8910) where you'll see the Login Page, where you must create an account to access the application.
 
-5. That's all! :)
+6. Your browser should automatically open to [http://localhost:8910](http://localhost:8910) where you'll see the Login Page, where you must create an account to access the application.
+
+7. That's all! :)
